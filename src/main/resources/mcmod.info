@@ -1,0 +1,16 @@
+[
+    {
+        "modid": "uranite",
+        "name": "Uranite",
+        "description": "",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": ["Pr3roxDLC"],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
