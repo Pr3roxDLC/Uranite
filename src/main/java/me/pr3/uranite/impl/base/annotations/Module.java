@@ -1,4 +1,4 @@
-package me.pr3.uranite.api.annotations;
+package me.pr3.uranite.impl.base.annotations;
 
 import me.pr3.uranite.api.feature.module.IModuleCategory;
 

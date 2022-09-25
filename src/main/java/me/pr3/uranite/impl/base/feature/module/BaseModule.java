@@ -1,6 +1,6 @@
 package me.pr3.uranite.impl.base.feature.module;
 
-import me.pr3.uranite.api.annotations.Module;
+import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
 

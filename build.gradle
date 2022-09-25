@@ -95,7 +95,7 @@ dependencies {
     compileOnly group: 'javax.enterprise', name: 'cdi-api', version: '1.2'
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
     implementation 'org.reflections:reflections:0.10.2'
-    //implementation 'com.github.tomitribe:microscoped:microscoped-0.3'
+    implementation 'com.github.tomitribe:microscoped:microscoped-0.3'
     implementation 'com.github.Pr3roxDLC:Hipster-Catching:v1.0.0'
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency

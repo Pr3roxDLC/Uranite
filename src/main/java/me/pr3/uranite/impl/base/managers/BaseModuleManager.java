@@ -1,7 +1,6 @@
 package me.pr3.uranite.impl.base.managers;
 
-import jdk.internal.reflect.Reflection;
-import me.pr3.uranite.api.annotations.Module;
+import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.managers.IModuleManager;
 import org.reflections.Reflections;
