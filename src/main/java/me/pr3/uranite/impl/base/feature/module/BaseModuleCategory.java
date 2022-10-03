@@ -4,14 +4,17 @@ import me.pr3.uranite.api.feature.module.IModuleCategory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
-public class BaseModuleCategory implements IModuleCategory {
-    public static IModuleCategory WORLD = new BaseModuleCategory("WORLD");
-    public static IModuleCategory PLAYER = new BaseModuleCategory("PLAYER");
-    public static IModuleCategory MISC = new BaseModuleCategory("MISC");
-    public static IModuleCategory CHAT = new BaseModuleCategory("CHAT");
+//Fake enum to enable extension of this class
+ public class BaseModuleCategory implements IModuleCategory {
 
-    public static Collection<IModuleCategory> MODULE_CATEGORIES = new ArrayList<>();
+    public static final IModuleCategory WORLD = new BaseModuleCategory("WORLD");
+    public static final IModuleCategory PLAYER = new BaseModuleCategory("PLAYER");
+    public static final IModuleCategory MISC = new BaseModuleCategory("MISC");
+    public static final IModuleCategory CHAT = new BaseModuleCategory("CHAT");
+
+    private static final Collection<IModuleCategory> MODULE_CATEGORIES = new ArrayList<>();
 
 
     private final String name;
@@ -22,6 +25,11 @@ public class BaseModuleCategory implements IModuleCategory {
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("No Such Module Category"));
     }
 
+    public static Collection<IModuleCategory> values(){
+        return MODULE_CATEGORIES;
+    }
+
+
     public BaseModuleCategory(String name) {
         this.name = name;
     }
@@ -29,6 +37,19 @@ public class BaseModuleCategory implements IModuleCategory {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseModuleCategory that = (BaseModuleCategory) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     static {

@@ -46,7 +46,7 @@ minecraft {
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            property 'forge.logging.console.level', 'debug'
+            //property 'forge.logging.console.level', 'debug'
 
 
             mods {
@@ -92,11 +92,9 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    compileOnly group: 'javax.enterprise', name: 'cdi-api', version: '1.2'
-    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
     implementation 'org.reflections:reflections:0.10.2'
-    implementation 'com.github.tomitribe:microscoped:microscoped-0.3'
     implementation 'com.github.Pr3roxDLC:Hipster-Catching:v1.0.0'
+    implementation group: 'com.google.inject', name: 'guice', version: '4.0'
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

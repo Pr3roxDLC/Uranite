@@ -4,6 +4,8 @@ import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
 
+import java.util.Objects;
+
 public class BaseModule implements IModule {
 
     private final String name;
@@ -40,5 +42,18 @@ public class BaseModule implements IModule {
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseModule that = (BaseModule) o;
+        return Objects.equals(name, that.name) && Objects.equals(category, that.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category);
     }
 }
