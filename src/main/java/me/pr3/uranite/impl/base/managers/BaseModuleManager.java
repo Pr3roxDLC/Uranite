@@ -20,6 +20,12 @@ public class BaseModuleManager implements IModuleManager {
     private final Map<String, IModule> moduleMap = new HashMap<>();
     private static final Set<Class<?>> moduleClasses = new HashSet<>();
 
+
+    @Inject
+    public BaseModuleManager(){
+        System.out.println("New BaseModuleManager");
+    }
+
     @Override
     public void init() {
         moduleClasses.addAll(new Reflections().getTypesAnnotatedWith(Module.class));
@@ -33,11 +39,11 @@ public class BaseModuleManager implements IModuleManager {
                 if (moduleClass.isAnnotationPresent((Class<? extends Annotation>) scopeClass)) {
                     TRY(() -> {
                         String moduleName = moduleClass.getDeclaredAnnotation(Module.class).name();
-                        if (moduleMap.containsKey(moduleName)) {
-                            MinecraftForge.EVENT_BUS.unregister(moduleMap.get(moduleName));
+                        if (moduleMap.containsKey(moduleName.toLowerCase())) {
+                            MinecraftForge.EVENT_BUS.unregister(moduleMap.get(moduleName.toLowerCase()));
                         }
                         IModule module = (IModule) Uranite.INJECTOR.getInstance(moduleClass);
-                        moduleMap.put(moduleName, module);
+                        moduleMap.put(moduleName.toLowerCase(), module);
                     }).CATCH(Throwable::printStackTrace);
                 }
             }
@@ -47,6 +53,11 @@ public class BaseModuleManager implements IModuleManager {
     @Override
     public Collection<IModule> getModules() {
         return moduleMap.values();
+    }
+
+    @Override
+    public IModule getModule(String name) {
+       return moduleMap.get(name.toLowerCase());
     }
 
 

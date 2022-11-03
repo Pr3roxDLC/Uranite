@@ -7,7 +7,6 @@ import me.pr3.uranite.impl.base.annotations.scopes.ClientScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.LifeScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.ServerScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.WorldScoped;
-import me.pr3.uranite.impl.base.util.SimpleScope;
 
 public class ScopeModule extends AbstractModule {
     private final SimpleScope clientScope = new SimpleScope();

@@ -5,7 +5,7 @@ import me.pr3.uranite.impl.base.annotations.scopes.ClientScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.LifeScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.ServerScoped;
 import me.pr3.uranite.impl.base.annotations.scopes.WorldScoped;
-import me.pr3.uranite.impl.base.util.SimpleScope;
+import me.pr3.uranite.impl.base.util.scopes.SimpleScope;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -56,10 +56,11 @@ public class ScopeManager {
 
     @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent e) {
-        if(e.getEntity() == Minecraft.getMinecraft().player) {
+        if (e.getEntity().equals(Minecraft.getMinecraft().player)) {
             //TODO Why does this happen
             TRY(() -> {
                 lifeScope.exit();
+
             });
             lifeScope.enter();
             manager.updateModules(LifeScoped.class);

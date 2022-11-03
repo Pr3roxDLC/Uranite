@@ -1,4 +1,4 @@
-package me.pr3.uranite.impl.base.util;
+package me.pr3.uranite.impl.base.util.scopes;
 
 import static com.google.common.base.Preconditions.checkState;
 import com.google.common.collect.Maps;

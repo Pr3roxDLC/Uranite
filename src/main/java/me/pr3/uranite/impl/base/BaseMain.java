@@ -3,9 +3,10 @@ package me.pr3.uranite.impl.base;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import me.pr3.uranite.Uranite;
+import me.pr3.uranite.impl.base.managers.BaseCommandManager;
 import me.pr3.uranite.impl.base.managers.BaseModuleManager;
 import me.pr3.uranite.impl.base.managers.ScopeManager;
-import me.pr3.uranite.impl.base.util.SimpleScope;
+import me.pr3.uranite.impl.base.util.scopes.SimpleScope;
 
 public class BaseMain {
 
@@ -22,7 +23,7 @@ public class BaseMain {
         manager.init();
         ScopeManager scopeManager = Uranite.INJECTOR.getInstance(ScopeManager.class);
         scopeManager.init();
-
+        BaseCommandManager commandManager = Uranite.INJECTOR.getInstance(BaseCommandManager.class);
 
     }
 

@@ -3,6 +3,7 @@ package me.pr3.uranite.impl.base.feature.module;
 import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Objects;
 
@@ -41,6 +42,13 @@ public class BaseModule implements IModule {
 
     @Override
     public void setEnabled(boolean enabled) {
+        if(this.enabled != enabled){
+            if(enabled){
+                this.onEnabled();
+            }else {
+                this.onDisabled();
+            }
+        }
         this.enabled = enabled;
     }
 
@@ -55,5 +63,13 @@ public class BaseModule implements IModule {
     @Override
     public int hashCode() {
         return Objects.hash(name, category);
+    }
+
+    public void onEnabled(){
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    public void onDisabled(){
+        MinecraftForge.EVENT_BUS.unregister(this);
     }
 }

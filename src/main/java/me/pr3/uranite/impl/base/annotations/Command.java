@@ -4,8 +4,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Module {
+public @interface Command {
     String name();
-    String category();
+    String syntax();
     String description();
 }

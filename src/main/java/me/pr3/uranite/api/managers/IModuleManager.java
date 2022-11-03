@@ -7,5 +7,7 @@ import java.util.Collection;
 public interface IModuleManager {
     void init();
     Collection<IModule> getModules();
+    IModule getModule(String name);
+
 
 }
