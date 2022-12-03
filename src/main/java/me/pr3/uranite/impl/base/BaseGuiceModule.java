@@ -1,6 +1,7 @@
 package me.pr3.uranite.impl.base;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provider;
 import com.google.inject.ScopeAnnotation;
 import me.pr3.uranite.api.managers.IModuleManager;
 import me.pr3.uranite.impl.base.managers.BaseModuleManager;
@@ -9,11 +10,17 @@ import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
 import java.lang.annotation.Annotation;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("deprecation")
 public class BaseGuiceModule extends AbstractModule {
+
+    //HashMap keeping track of the current instance for each class
+    public static Map<Class<?>, Object> instanceMap = new HashMap<>();
 
     //Do all the binding automatically, custom implementation of @Specializes
     @Override
@@ -32,12 +39,14 @@ public class BaseGuiceModule extends AbstractModule {
         //or use the implementation, or the specialization of your class declared with @Specializes
         for (Class clazz : scopedClasses) {
             System.out.println("Binding class: " + clazz.getName());
-            bind(clazz);
+            instanceMap.put(clazz, null);
+            bind(clazz).toProvider(() -> instanceMap.get(clazz));
         }
 
         bind(IModuleManager.class).to(BaseModuleManager.class);
 
         install(new ScopeModule());
+
 
     }
 
