@@ -21,7 +21,6 @@ public class SomeTestModule extends BaseModule {
 
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event){
-        System.out.println(suffix==null?"null":suffix.get().test);
     }
 
 }

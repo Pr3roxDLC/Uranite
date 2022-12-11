@@ -47,6 +47,7 @@ public class BaseModuleManager implements IModuleManager {
                             MinecraftForge.EVENT_BUS.unregister(moduleMap.get(moduleName.toLowerCase()));
                         }
                         IModule module = (IModule) Uranite.INJECTOR.getInstance(moduleClass);
+                        module.setEnabled(true);
                         moduleMap.put(moduleName.toLowerCase(), module);
                     }).CATCH(Throwable::printStackTrace);
                 }

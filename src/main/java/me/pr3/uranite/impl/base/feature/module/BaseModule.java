@@ -13,7 +13,7 @@ public class BaseModule implements IModule {
     private final String name;
     private final IModuleCategory category;
     private final String description;
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     public BaseModule(){
         name = this.getClass().getAnnotation(Module.class).name();
@@ -71,7 +71,6 @@ public class BaseModule implements IModule {
     }
 
     public void onDisabled(){
-        //TODO unsubscribe
-      //  MinecraftForge.EVENT_BUS.unregister(this);
+        Uranite.EVENT_BUS.unsubscribe(this);
     }
 }

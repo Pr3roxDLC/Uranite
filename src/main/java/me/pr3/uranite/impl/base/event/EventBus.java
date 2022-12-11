@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static me.pr3.catcher.Catcher.TRY;
 
@@ -35,6 +36,14 @@ public class EventBus {
             });
         }
 
+    }
+
+    public void unsubscribe(Object object){
+        for (Map.Entry<Class<? extends Event>, Set<Pair<Object, Method>>> classSetEntry : listenerMap.entrySet()) {
+            Class<? extends Event> eventClass = classSetEntry.getKey();
+            Set<Pair<Object, Method>> pairs = classSetEntry.getValue();
+            pairs.removeAll(pairs.stream().filter(p -> p.getLeft().equals(object)).collect(Collectors.toSet()));
+        }
     }
 
     @SubscribeEvent

@@ -12,17 +12,9 @@ import net.minecraftforge.client.event.ClientChatEvent;
 @Module(name = "ChatSuffix", category = "CHAT", description = "Adds a Suffix to your chat messages")
 public class ChatSuffix extends BaseModule {
 
-    public long test = 0;
-
-    public ChatSuffix(){
-        test = System.currentTimeMillis();
-    }
-
+    public String suffix = " | Uranite";
     public void onChatMessage(@Observes ClientChatEvent e){
         if(e.getMessage().startsWith("/") || e.getMessage().startsWith(BaseCommandManager.PREFIX))return;
-        e.setMessage(e.getMessage() + test);
+        e.setMessage(e.getMessage() + suffix);
     }
-
-
-
 }
