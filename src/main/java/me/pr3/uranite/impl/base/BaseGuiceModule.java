@@ -1,19 +1,16 @@
 package me.pr3.uranite.impl.base;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provider;
 import com.google.inject.ScopeAnnotation;
-import me.pr3.uranite.api.managers.IModuleManager;
-import me.pr3.uranite.impl.base.managers.BaseModuleManager;
+import com.google.inject.multibindings.Multibinder;
+import me.pr3.uranite.Uranite;
 import me.pr3.uranite.impl.base.util.scopes.ScopeModule;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
 import java.lang.annotation.Annotation;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.AnnotatedElement;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("deprecation")
@@ -25,6 +22,26 @@ public class BaseGuiceModule extends AbstractModule {
     //Do all the binding automatically, custom implementation of @Specializes
     @Override
     protected void configure() {
+//        Set<Class<?>> scopes = new HashSet<>(new Reflections().getTypesAnnotatedWith(ScopeAnnotation.class));
+//        System.out.println(scopes);
+//        Set<Class<?>> classes = new HashSet<>(new Reflections("me.pr3.uranite", new SubTypesScanner(false)).getSubTypesOf(Object.class));
+//        System.out.println(classes);
+//
+//        Set<Class<?>> scopedClasses = classes.stream()
+//                .filter(clazz -> isClassAnnotatedWithOneOfProvided(clazz, scopes))
+//                .collect(Collectors.toSet());
+//        System.out.println(scopedClasses);
+//
+//        //All classes that are @Scoped will be supplied as an @Inject(able) Dependency, to access a dependency you can either use the interface your class implements
+//        //or use the implementation, or the specialization of your class declared with @Specializes
+//        for (Class clazz : scopedClasses) {
+//            System.out.println("Binding class: " + clazz.getName());
+//            instanceMap.put(clazz, null);
+//            bind(clazz).toConstructor(clazz.getConstructors()[0]);
+//        }
+//
+//        bind(IModuleManager.class).to(BaseModuleManager.class);
+
         Set<Class<?>> scopes = new HashSet<>(new Reflections().getTypesAnnotatedWith(ScopeAnnotation.class));
         System.out.println(scopes);
         Set<Class<?>> classes = new HashSet<>(new Reflections("me.pr3.uranite", new SubTypesScanner(false)).getSubTypesOf(Object.class));
@@ -35,19 +52,31 @@ public class BaseGuiceModule extends AbstractModule {
                 .collect(Collectors.toSet());
         System.out.println(scopedClasses);
 
-        //All classes that are @Scoped will be supplied as an @Inject(able) Dependency, to access a dependency you can either use the interface your class implements
-        //or use the implementation, or the specialization of your class declared with @Specializes
-        for (Class clazz : scopedClasses) {
-            System.out.println("Binding class: " + clazz.getName());
-            instanceMap.put(clazz, null);
-            bind(clazz).toProvider(() -> instanceMap.get(clazz));
+        Multibinder<Object> multibinder = Multibinder.newSetBinder(binder(), Object.class);
+
+        for (Class scopedClass : scopedClasses) {
+
+            Class<? extends Annotation> scope = getScopeAnnotationForClass(scopedClass);
+            if(scope!=null) {
+                System.out.println("Binding " + scopedClass + " to " + scope);
+                multibinder.addBinding().to(scopedClass).in(scope);
+            }
+
         }
 
-        bind(IModuleManager.class).to(BaseModuleManager.class);
 
         install(new ScopeModule());
 
 
+    }
+
+    public Class<? extends Annotation> getScopeAnnotationForClass(Class<?> clazz) {
+        for (Class<?> scope : Uranite.SCOPES) {
+            if (clazz.isAnnotationPresent((Class<? extends Annotation>) scope)) {
+                return (Class<? extends Annotation>) scope;
+            }
+        }
+        return null;
     }
 
     public boolean isClassAnnotatedWithOneOfProvided(Class<?> clazz, Set<Class<?>> annotations) {
@@ -56,4 +85,6 @@ public class BaseGuiceModule extends AbstractModule {
         }
         return false;
     }
+
+
 }

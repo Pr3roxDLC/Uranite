@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import me.pr3.uranite.api.managers.IModuleManager;
 import me.pr3.uranite.impl.base.annotations.Command;
 import me.pr3.uranite.impl.base.feature.command.BaseCommand;
+import me.pr3.uranite.impl.base.managers.BaseModuleManager;
 
 import java.util.List;
 import java.util.Locale;
@@ -12,7 +13,7 @@ import java.util.Locale;
 public class Toggle extends BaseCommand {
 
     @Inject
-    IModuleManager manager;
+    BaseModuleManager manager;
 
     @Override
     public void executeCommand(List<String> args) {

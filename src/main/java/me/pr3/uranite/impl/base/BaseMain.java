@@ -10,19 +10,19 @@ import me.pr3.uranite.impl.base.util.scopes.SimpleScope;
 
 public class BaseMain {
 
+
     @Inject
     public BaseMain( @Named("clientScope") SimpleScope scope){
         //This is the client lifecycle, everything happens in here
-
-        //Enter the @ClientScope
         scope.enter();
         //Not required as it represents the entire lifecycle of the client, only here for the sake of correctness
         Runtime.getRuntime().addShutdownHook(new Thread(scope::exit));
-        //Client initializationz
+        //Client initialization
+        BaseModuleManager manager = Uranite.INJECTOR.getInstance(BaseModuleManager.class);
+        manager.init();
         ScopeManager scopeManager = Uranite.INJECTOR.getInstance(ScopeManager.class);
         scopeManager.init();
         BaseCommandManager commandManager = Uranite.INJECTOR.getInstance(BaseCommandManager.class);
-
     }
 
 

@@ -1,5 +1,6 @@
 package me.pr3.uranite.impl.base.feature.module;
 
+import me.pr3.uranite.Uranite;
 import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
@@ -12,7 +13,7 @@ public class BaseModule implements IModule {
     private final String name;
     private final IModuleCategory category;
     private final String description;
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     public BaseModule(){
         name = this.getClass().getAnnotation(Module.class).name();
@@ -66,10 +67,11 @@ public class BaseModule implements IModule {
     }
 
     public void onEnabled(){
-        MinecraftForge.EVENT_BUS.register(this);
+        Uranite.EVENT_BUS.subscribe(this);
     }
 
     public void onDisabled(){
-        MinecraftForge.EVENT_BUS.unregister(this);
+        //TODO unsubscribe
+      //  MinecraftForge.EVENT_BUS.unregister(this);
     }
 }

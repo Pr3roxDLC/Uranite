@@ -2,11 +2,15 @@ package me.pr3.uranite.impl.base.managers;
 
 import com.google.inject.Inject;
 import me.pr3.uranite.Uranite;
+import me.pr3.uranite.impl.base.annotations.Command;
 import me.pr3.uranite.impl.base.annotations.Module;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.managers.IModuleManager;
+import me.pr3.uranite.impl.base.annotations.event.Observes;
 import me.pr3.uranite.impl.base.annotations.scopes.ClientScoped;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import org.reflections.Reflections;
 
 import java.lang.annotation.Annotation;

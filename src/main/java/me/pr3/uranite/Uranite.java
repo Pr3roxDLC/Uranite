@@ -4,10 +4,18 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import me.pr3.uranite.impl.base.BaseGuiceModule;
 import me.pr3.uranite.impl.base.BaseMain;
+import me.pr3.uranite.impl.base.annotations.scopes.ClientScoped;
+import me.pr3.uranite.impl.base.annotations.scopes.LifeScoped;
+import me.pr3.uranite.impl.base.annotations.scopes.ServerScoped;
+import me.pr3.uranite.impl.base.annotations.scopes.WorldScoped;
+import me.pr3.uranite.impl.base.event.EventBus;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Mod(
         modid = Uranite.MOD_ID,
@@ -20,7 +28,11 @@ public class Uranite {
     public static final String MOD_NAME = "Uranite";
     public static final String VERSION = "1.0-SNAPSHOT";
 
+    public static final Set<Class<?>> SCOPES = new HashSet<>();
+
     public static Injector INJECTOR;
+
+    public static final EventBus EVENT_BUS = new EventBus();
 
     /**
      * This is the instance of your mod as created by Forge. It will never be null.
@@ -34,8 +46,16 @@ public class Uranite {
      */
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
+
+        SCOPES.add(ClientScoped.class);
+        SCOPES.add(LifeScoped.class);
+        SCOPES.add(ServerScoped.class);
+        SCOPES.add(WorldScoped.class);
+
+
         INJECTOR = Guice.createInjector(new BaseGuiceModule());
         INJECTOR.getInstance(BaseMain.class);
+
     }
 
     /**

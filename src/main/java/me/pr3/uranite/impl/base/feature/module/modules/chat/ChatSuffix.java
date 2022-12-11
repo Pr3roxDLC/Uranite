@@ -1,11 +1,11 @@
 package me.pr3.uranite.impl.base.feature.module.modules.chat;
 
 import me.pr3.uranite.impl.base.annotations.Module;
+import me.pr3.uranite.impl.base.annotations.event.Observes;
 import me.pr3.uranite.impl.base.annotations.scopes.LifeScoped;
 import me.pr3.uranite.impl.base.feature.module.BaseModule;
 import me.pr3.uranite.impl.base.managers.BaseCommandManager;
 import net.minecraftforge.client.event.ClientChatEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
 @LifeScoped
@@ -16,13 +16,13 @@ public class ChatSuffix extends BaseModule {
 
     public ChatSuffix(){
         test = System.currentTimeMillis();
-        System.out.println("Created " + ChatSuffix.class.getName() + test);
     }
 
-    @SubscribeEvent
-    public void onChatMessage(ClientChatEvent e){
+    public void onChatMessage(@Observes ClientChatEvent e){
         if(e.getMessage().startsWith("/") || e.getMessage().startsWith(BaseCommandManager.PREFIX))return;
         e.setMessage(e.getMessage() + test);
     }
+
+
 
 }

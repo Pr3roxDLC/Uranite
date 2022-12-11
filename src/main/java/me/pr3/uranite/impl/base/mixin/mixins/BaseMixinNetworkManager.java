@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class BaseMixinNetworkManager {
     @Inject(method = "sendPacket*", at = @At("RETURN"))
     public void sendPacket(Packet<?> packetIn, CallbackInfo ci){
-        System.out.println(packetIn.toString());
+       // System.out.println(packetIn.toString());
     }
 }

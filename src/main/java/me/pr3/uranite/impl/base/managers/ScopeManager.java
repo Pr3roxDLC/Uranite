@@ -45,7 +45,7 @@ public class ScopeManager {
 
 
     public void init() {
-        updateScopedInstances(ClientScoped.class);
+        manager.updateModules(ClientScoped.class);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -55,7 +55,7 @@ public class ScopeManager {
         serverScope.enter();
         lifeScope.enter();
         worldScope.enter();
-        updateScopedInstances(ServerScoped.class, LifeScoped.class, WorldScoped.class);
+        manager.updateModules(ServerScoped.class, LifeScoped.class, WorldScoped.class);
     }
 
     @SubscribeEvent
@@ -72,7 +72,7 @@ public class ScopeManager {
                 lifeScope.exit();
             });
             lifeScope.enter();
-            updateScopedInstances(LifeScoped.class);
+            manager.updateModules(LifeScoped.class);
         }
     }
 
