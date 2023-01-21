@@ -1,11 +1,11 @@
-package me.pr3.uranite.impl.base.annotations;
+package me.pr3.uranite.impl.base.feature.modules;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Command {
+public @interface Module {
     String name();
-    String syntax();
+    String category();
     String description();
 }
