@@ -9,16 +9,16 @@ public abstract class AbstractModule implements IModule {
     private String name = "";
     private String category = "";
     private String description = "";
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @Inject
     private ModuleCategoryProvider moduleCategoryProvider;
 
-    public AbstractModule(){
-      Module module = this.getClass().getAnnotation(Module.class);
-      name = module.name();
-      category = module.category();
-      description = module.description();
+    public AbstractModule() {
+        Module module = this.getClass().getAnnotation(Module.class);
+        name = module.name();
+        category = module.category();
+        description = module.description();
     }
 
 
@@ -42,18 +42,21 @@ public abstract class AbstractModule implements IModule {
         return enabled;
     }
 
-    public void onEnable(){
+    public void onEnable() {
         EventManager.subscribe(this);
     }
 
-    public void onDisable(){
+    public void onDisable() {
         EventManager.unsubscribe(this);
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        if(this.enabled && !enabled){
-
+        if (!this.enabled && enabled) {
+            onEnable();
+        }
+        if (this.enabled && !enabled) {
+            onDisable();
         }
     }
 }
