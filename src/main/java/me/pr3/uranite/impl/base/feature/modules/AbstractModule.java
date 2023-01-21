@@ -4,6 +4,7 @@ import me.pr3.cdi.annotations.Inject;
 import me.pr3.cdi.extensions.events.EventManager;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
+import me.pr3.uranite.impl.base.managers.ModuleManager;
 
 public abstract class AbstractModule implements IModule {
     private String name = "";
@@ -14,11 +15,15 @@ public abstract class AbstractModule implements IModule {
     @Inject
     private ModuleCategoryProvider moduleCategoryProvider;
 
+    @Inject
+    private ModuleManager moduleManager;
+
     public AbstractModule() {
         Module module = this.getClass().getAnnotation(Module.class);
         name = module.name();
         category = module.category();
         description = module.description();
+        moduleManager.setModuleInstance(name, this);
     }
 
 

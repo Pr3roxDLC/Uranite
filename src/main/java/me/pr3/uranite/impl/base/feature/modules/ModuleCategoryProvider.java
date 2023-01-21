@@ -12,7 +12,6 @@ public class ModuleCategoryProvider {
     public static ModuleCategory MOVEMENT = new ModuleCategory("MOVEMENT", "Movement");
     public static ModuleCategory PLAYER = new ModuleCategory("PLAYER", "Player");
     public static ModuleCategory COMBAT = new ModuleCategory("COMBAT", "Combat");
-
     public static ModuleCategory CHAT = new ModuleCategory("CHAT", "Chat");
 
     public List<ModuleCategory> getCategories(){
