@@ -1,6 +1,7 @@
 package me.pr3.uranite.impl.base.feature.modules;
 
 import me.pr3.cdi.annotations.Inject;
+import me.pr3.cdi.annotations.PostConstruct;
 import me.pr3.cdi.extensions.events.EventManager;
 import me.pr3.uranite.api.feature.module.IModule;
 import me.pr3.uranite.api.feature.module.IModuleCategory;
@@ -23,6 +24,10 @@ public abstract class AbstractModule implements IModule {
         name = module.name();
         category = module.category();
         description = module.description();
+    }
+
+    @PostConstruct
+    protected void postConstruct(){
         moduleManager.setModuleInstance(name, this);
     }
 
