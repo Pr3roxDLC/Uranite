@@ -30,7 +30,4 @@ public class NetworkManager {
         pipeline.addBefore("packet_handler", "packet_interceptor", connection);
         EventManager.unsubscribe(this);
     }
-
-
-
 }

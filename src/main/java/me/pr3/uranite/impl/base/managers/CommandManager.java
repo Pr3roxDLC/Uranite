@@ -14,7 +14,6 @@ import org.reflections.Reflections;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 @ClientScoped
 public class CommandManager implements ICommandManager {
@@ -23,7 +22,6 @@ public class CommandManager implements ICommandManager {
 
     @Inject
     public CommandManager() {
-
         Reflections ref = new Reflections();
         ref.getTypesAnnotatedWith(Command.class).forEach(clazz -> {
             commands.put(clazz.getAnnotation(Command.class).name(), clazz);
