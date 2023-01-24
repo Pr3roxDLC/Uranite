@@ -9,6 +9,7 @@ import me.pr3.uranite.impl.base.feature.modules.AbstractModule;
 import me.pr3.uranite.impl.base.feature.modules.Module;
 import me.pr3.uranite.impl.base.managers.CommandManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraftforge.client.event.ClientChatEvent;
 
 
@@ -27,7 +28,7 @@ public class ChatSuffix extends AbstractModule {
     }
 
     public void onClientTick(@Observes ClientChatEvent event) {
-        if(event.getMessage().startsWith(commandManager.getPrefix()) || event.getMessage().startsWith("/"))return;
+        if (event.getMessage().startsWith(commandManager.getPrefix()) || event.getMessage().startsWith("/")) return;
         event.setMessage(event.getMessage() + Minecraft.getMinecraft().player.getName());
     }
 
