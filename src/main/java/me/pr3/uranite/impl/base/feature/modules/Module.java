@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Module {
     String name();
     String category();
-    String description();
+    String description() default "";
 }

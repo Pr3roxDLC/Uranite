@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Command {
     String name();
-    String syntax();
-    String description();
+    String syntax() default "";
+    String description() default "";
 }
