@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 @ClientScoped
 public class ModuleManager implements IModuleManager {
-    HashMap<String, IModule> moduleMap = new HashMap<>();
+    private final HashMap<String, IModule> moduleMap = new HashMap<>();
 
     @Override
     public Collection<IModule> getModules() {

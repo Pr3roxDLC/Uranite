@@ -2,9 +2,7 @@ package me.pr3.uranite.impl.base.managers.network;
 
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
-import me.pr3.cdi.annotations.Inject;
 import me.pr3.cdi.annotations.scopes.ClientScoped;
 import me.pr3.cdi.extensions.events.EventManager;
 import me.pr3.uranite.impl.base.events.packet.PacketEvent;

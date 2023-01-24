@@ -8,9 +8,9 @@ import me.pr3.uranite.api.feature.module.IModuleCategory;
 import me.pr3.uranite.impl.base.managers.ModuleManager;
 
 public abstract class AbstractModule implements IModule {
-    private String name = "";
-    private String category = "";
-    private String description = "";
+    private final String name;
+    private final String category;
+    private final String description;
     private boolean enabled = false;
 
     @Inject
@@ -64,9 +64,11 @@ public abstract class AbstractModule implements IModule {
     public void setEnabled(boolean enabled) {
         if (!this.enabled && enabled) {
             onEnable();
+            this.enabled = true;
         }
         if (this.enabled && !enabled) {
             onDisable();
+            this.enabled = false;
         }
     }
 }

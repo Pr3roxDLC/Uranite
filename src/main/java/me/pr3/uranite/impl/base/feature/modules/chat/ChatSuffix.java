@@ -4,12 +4,10 @@ import me.pr3.cdi.annotations.Inject;
 import me.pr3.cdi.annotations.PostConstruct;
 import me.pr3.cdi.annotations.scopes.ClientScoped;
 import me.pr3.cdi.extensions.events.annotations.Observes;
-import me.pr3.uranite.impl.base.events.packet.PacketSentEvent;
 import me.pr3.uranite.impl.base.feature.modules.AbstractModule;
 import me.pr3.uranite.impl.base.feature.modules.Module;
 import me.pr3.uranite.impl.base.managers.CommandManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraftforge.client.event.ClientChatEvent;
 
 

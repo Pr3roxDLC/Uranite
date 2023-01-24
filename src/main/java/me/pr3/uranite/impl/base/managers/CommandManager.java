@@ -23,9 +23,7 @@ public class CommandManager implements ICommandManager {
     @Inject
     public CommandManager() {
         Reflections ref = new Reflections();
-        ref.getTypesAnnotatedWith(Command.class).forEach(clazz -> {
-            commands.put(clazz.getAnnotation(Command.class).name(), clazz);
-        });
+        ref.getTypesAnnotatedWith(Command.class).forEach(clazz -> commands.put(clazz.getAnnotation(Command.class).name(), clazz));
         EventManager.subscribe(this);
     }
 
